@@ -1,10 +1,11 @@
 version: '3.7'
-
 services:
   helix-honeypot-k8s:
     build: ./
     ports:
       - "127.0.0.1:8111:8111"
+    volumes:
+      - k8s_log:/var/log
     environment:
       - RUN_MODE=k8s
       - HELIX_LOCATION=testing
@@ -19,6 +20,8 @@ services:
     build: ./
     ports:
       - "127.0.0.1:8000:8000"
+    volumes:
+      - http_log:/var/log
     environment:
       - RUN_MODE=http
       - HELIX_HTTP_HOST=0.0.0.0
@@ -28,6 +31,8 @@ services:
     build: ./
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - tcp_log:/var/log
     environment:
       - RUN_MODE=tcp
       - HELIX_TCP_HOST=0.0.0.0
@@ -37,6 +42,8 @@ services:
     build: ./
     ports:
       - "127.0.0.1:53535:53/udp"
+    volumes:
+      - udp_log:/var/log
     environment:
       - RUN_MODE=udp
       - HELIX_UDP_HOST=0.0.0.0
@@ -46,7 +53,21 @@ services:
     build: ./
     ports:
       - "127.0.0.1:8001:8001"
+    volumes:
+      - def_log:/var/log
     environment:
       - RUN_MODE=def
       - HELIX_DEF_HOST=0.0.0.0
       - HELIX_DEF_PORT=8001
+
+volumes:
+  k8s_log:
+    driver: local
+  http_log:
+    driver: local
+  tcp_log:
+    driver: local
+  udp_log:
+    driver: local
+  def_log:
+    driver: local
