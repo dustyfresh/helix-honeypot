@@ -4,7 +4,7 @@ services:
   helix-honeypot-k8s:
     build: ./
     ports:
-      - "8111:8111"
+      - "127.0.0.1:8111:8111"
     environment:
       - RUN_MODE=k8s
       - HELIX_LOCATION=testing
@@ -18,7 +18,7 @@ services:
   helix-honeypot-http:
     build: ./
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     environment:
       - RUN_MODE=http
       - HELIX_HTTP_HOST=0.0.0.0
@@ -27,7 +27,7 @@ services:
   helix-honeypot-tcp:
     build: ./
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - RUN_MODE=tcp
       - HELIX_TCP_HOST=0.0.0.0
@@ -36,7 +36,7 @@ services:
   helix-honeypot-udp:
     build: ./
     ports:
-      - "53:53/udp"
+      - "127.0.0.1:53535:53/udp"
     environment:
       - RUN_MODE=udp
       - HELIX_UDP_HOST=0.0.0.0
@@ -45,9 +45,8 @@ services:
   helix-honeypot-def:
     build: ./
     ports:
-      - "8001:8001"
+      - "127.0.0.1:8001:8001"
     environment:
       - RUN_MODE=def
       - HELIX_DEF_HOST=0.0.0.0
       - HELIX_DEF_PORT=8001
-
