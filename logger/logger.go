@@ -166,7 +166,7 @@ func (cl *LocalCustomLogger) LogToJSONLines(entryFields logrus.Fields, startTime
 	}
 
 	// Open file in append mode or create it if it doesn't exist
-	file, err := os.OpenFile("/helix.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("/var/log/helix.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		cl.Logger.WithError(err).Error("Failed to open log file")
 		return
